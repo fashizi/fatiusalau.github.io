@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fatiu Babalola Salau — Projects</title>
+  <meta name="description" content="Project portfolio of Fatiu Salau" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy:       #0f1729;
+      --navy-mid:   #192240;
+      --navy-soft:  #253356;
+      --gold:       #c9a84c;
+      --gold-light: #e8cc82;
+      --gold-dim:   rgba(201,168,76,0.14);
+      --cream:      #f8f6f1;
+      --paper:      #ffffff;
+      --ink:        #1a1a2a;
+      --muted:      #6b6f7f;
+      --border:     #e4e1da;
+      --sidebar-w:  290px;
+      --ease:       cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── PAGE GRID: fixed sidebar | scrollable content ── */
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+    }
+
+    /* ═══════════════════════ SIDEBAR ═══════════════════════ */
+    .sidebar {
+      grid-column: 1;
+      grid-row: 1;
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      scrollbar-width: none;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    .sidebar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 200px;
+      background: radial-gradient(ellipse 80% 60% at 50% -5%, rgba(201,168,76,0.22) 0%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .sidebar-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 40px 26px 32px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      width: 100px; height: 100px;
+      margin-bottom: 18px;
+    }
+    .avatar-ring {
+      position: absolute; inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(var(--gold) 0deg, var(--gold-light) 130deg, rgba(37,51,86,0.6) 220deg, var(--gold) 360deg);
+      animation: spin 14s linear infinite;
+    }
+    .avatar-ring::after {
+      content: '';
+      position: absolute; inset: 3px;
+      background: var(--navy);
+      border-radius: 50%;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .avatar-wrap img {
+      position: relative; z-index: 1;
+      width: 100%; height: 100%;
+      border-radius: 50%; object-fit: cover;
+    }
+
+    .s-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 600;
+      color: #fff; line-height: 1.35; margin-bottom: 4px;
+    }
+    .s-role {
+      font-size: 10px; font-weight: 500;
+      color: var(--gold);
+      text-transform: uppercase; letter-spacing: 1.8px;
+      margin-bottom: 24px;
+    }
+    .s-divider {
+      width: 36px; height: 2px;
+      background: var(--gold);
+      border-radius: 2px; margin-bottom: 22px;
+    }
+
+    .s-nav { list-style: none; display: flex; flex-direction: column; gap: 1px; }
+    .s-nav a {
+      display: flex; align-items: center; gap: 11px;
+      padding: 9px 12px; border-radius: 8px;
+      color: rgba(255,255,255,0.55); text-decoration: none;
+      font-size: 13.5px; font-weight: 500;
+      transition: all 0.22s var(--ease);
+      position: relative;
+    }
+    .s-nav a .ni { font-size: 13px; width: 17px; text-align: center; opacity: 0.75; flex-shrink: 0; }
+    .s-nav a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+    .s-nav a.active {
+      color: var(--gold-light);
+      background: var(--gold-dim);
+    }
+    .s-nav a.active::before {
+      content: '';
+      position: absolute; left: 0; top: 22%; bottom: 22%;
+      width: 3px; background: var(--gold); border-radius: 0 2px 2px 0;
+    }
+
+    .s-footer {
+      margin-top: auto; padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.09);
+    }
+    .s-footer-label {
+      font-size: 9px; text-transform: uppercase;
+      letter-spacing: 1.8px; color: rgba(255,255,255,0.28);
+      margin-bottom: 10px;
+    }
+    .s-socials { display: flex; gap: 7px; }
+    .s-socials a {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px;
+      border-radius: 7px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.55); text-decoration: none;
+      font-size: 13px; font-weight: 600;
+      transition: all 0.2s var(--ease);
+    }
+    .s-socials a:hover {
+      background: var(--gold-dim); border-color: var(--gold);
+      color: var(--gold-light); transform: translateY(-2px);
+    }
+
+    /* ═══════════════════════ CONTENT COLUMN ═══════════════════════ */
+    .content-col {
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .main {
+      flex: 1;
+      padding: 48px 52px 48px;
+      width: 100%;
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      position: fixed; top: 0;
+      left: var(--sidebar-w); right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform-origin: left; transform: scaleX(0);
+      z-index: 200; transition: transform 0.08s linear;
+    }
+
+    /* ═══════════════════════ SECTION CARDS ═══════════════════════ */
+    .sc {
+      background: var(--paper);
+      border-radius: 14px;
+      padding: 40px 44px;
+      margin-bottom: 36px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(15,23,41,0.05);
+      position: relative; overflow: hidden;
+      width: 100%;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease),
+                  box-shadow 0.3s var(--ease);
+    }
+    .sc.visible { opacity: 1; transform: none; }
+    .sc:hover { box-shadow: 0 6px 28px rgba(15,23,41,0.09); }
+    .sc::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 45%, transparent 100%);
+    }
+
+    .sec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
+    .sec-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .sec-head h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; font-weight: 700;
+      color: var(--navy); letter-spacing: -0.2px;
+    }
+
+    /* ── ABOUT (dark hero) ── */
+    #about.sc {
+      background: linear-gradient(140deg, var(--navy) 0%, var(--navy-mid) 55%, #1d2c4e 100%);
+      border-color: transparent;
+    }
+    #about .sec-head h1 { color: #fff; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 44px; align-items: start;
+    }
+    .about-bio p {
+      font-size: 15px; line-height: 1.82;
+      color: rgba(255,255,255,0.75); margin-bottom: 15px;
+    }
+    .about-bio p:last-child { margin-bottom: 0; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px; }
+    .tag {
+      padding: 4px 13px; border-radius: 100px;
+      font-size: 11.5px; font-weight: 500;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.28);
+      color: var(--gold-light); transition: all 0.2s;
+    }
+    .tag:hover { background: rgba(201,168,76,0.2); border-color: var(--gold); }
+
+    .about-meta { display: flex; flex-direction: column; gap: 26px; }
+    .meta-block h2 {
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.8px;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .tl { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .tl li {
+      position: relative; padding-left: 16px;
+      font-size: 13px; line-height: 1.55;
+      color: rgba(255,255,255,0.6);
+    }
+    .tl li::before {
+      content: ''; position: absolute; left: 0; top: 6px;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--gold);
+    }
+    .tl li strong { color: rgba(255,255,255,0.88); font-weight: 500; }
+
+    /* ── Activities ── */
+    .act-list { list-style: none; }
+    .act-item {
+      display: flex; gap: 22px;
+      padding: 18px 0; border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .act-item:first-child { padding-top: 0; }
+    .act-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .act-date {
+      flex-shrink: 0; min-width: 88px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11.5px; color: var(--gold); font-weight: 500; padding-top: 3px;
+    }
+    .act-body { font-size: 14.5px; line-height: 1.65; color: var(--ink); }
+    .badge {
+      display: inline-block; margin-right: 7px;
+      padding: 2px 9px; border-radius: 100px;
+      font-size: 10.5px; font-weight: 600;
+      background: #edf2ff; color: #3451b2;
+      vertical-align: middle; letter-spacing: 0.3px;
+    }
+
+    /* ── Publications ── */
+    .pub-list { list-style: none; }
+    .pub-item { padding: 24px 0; border-bottom: 1px solid var(--border); }
+    .pub-item:first-child { padding-top: 0; }
+    .pub-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .pub-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--gold);
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 7px;
+      display: block;
+    }
+    .pub-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17.5px; font-weight: 600;
+      color: var(--navy); line-height: 1.42; margin-bottom: 8px;
+    }
+    .pub-authors { font-size: 13px; color: var(--muted); margin-bottom: 5px; }
+    .pub-authors strong { color: var(--ink); font-weight: 600; }
+    .pub-venue { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 12px; }
+    .doi-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 16px; border-radius: 6px;
+      background: var(--navy); color: var(--gold-light);
+      font-size: 12px; font-weight: 500; text-decoration: none;
+      letter-spacing: 0.3px; transition: all 0.2s var(--ease);
+    }
+    .doi-btn:hover {
+      background: var(--navy-mid);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(15,23,41,0.22);
+    }
+
+    /* ── Projects ── */
+    .proj-empty {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 52px 24px;
+      border: 2px dashed var(--border);
+      border-radius: 12px; text-align: center; gap: 10px;
+    }
+    .proj-empty .pe-icon { font-size: 38px; opacity: 0.4; }
+    .proj-empty strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; color: var(--navy);
+    }
+    .proj-empty p { font-size: 13.5px; color: var(--muted); }
+
+    /* ── Teaching ── */
+    .teach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+    .teach-block {
+      background: var(--cream); border-radius: 11px;
+      padding: 24px 26px; border: 1px solid var(--border);
+    }
+    .teach-block h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15.5px; font-weight: 700; color: var(--navy);
+      margin-bottom: 16px; padding-bottom: 12px;
+      border-bottom: 2px solid var(--gold-dim);
+      display: flex; align-items: center; gap: 7px;
+    }
+    .course-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .c-item { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.55; }
+    .c-code {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; font-weight: 500;
+      color: #fff; background: var(--navy);
+      padding: 2px 8px; border-radius: 4px;
+      white-space: nowrap; flex-shrink: 0; margin-top: 1px;
+    }
+    .c-desc { color: var(--muted); }
+    .role-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .role-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .role-item:first-child { padding-top: 0; }
+    .role-t { font-weight: 600; font-size: 14px; color: var(--navy); margin-bottom: 2px; }
+    .role-p { font-size: 12.5px; color: var(--muted); }
+    .role-d { font-family: 'DM Mono', monospace; font-size: 10.5px; color: var(--gold); margin-top: 3px; }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+    }
+    .c-card {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; border-radius: 11px;
+      background: var(--cream); border: 1px solid var(--border);
+      text-decoration: none; color: var(--ink);
+      transition: all 0.25s var(--ease);
+    }
+    .c-card:hover {
+      border-color: var(--gold); background: var(--gold-dim);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.14);
+    }
+    .c-card-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: var(--navy); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 17px; flex-shrink: 0; color: var(--gold-light);
+    }
+    .c-card-text { display: flex; flex-direction: column; }
+    .c-label {
+      font-size: 9.5px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--muted); margin-bottom: 2px;
+    }
+    .c-val { font-size: 13.5px; font-weight: 500; color: var(--navy); }
+
+    /* ═══════════════════════ FOOTER ═══════════════════════ */
+    .site-footer {
+      padding: 22px 52px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+      color: var(--muted); font-size: 12.5px;
+      background: var(--cream);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px; font-weight: 600; color: var(--navy);
+    }
+    .footer-socials { display: flex; align-items: center; gap: 10px; }
+    .footer-socials a {
+      display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border-radius: 7px;
+      background: var(--paper); border: 1px solid var(--border);
+      color: var(--muted); text-decoration: none;
+      font-size: 12px; font-weight: 600;
+      transition: all 0.2s var(--ease);
+    }
+    .footer-socials a:hover {
+      background: var(--navy); border-color: var(--navy);
+      color: var(--gold-light); transform: translateY(-2px);
+    }
+
+    /* ═══════════════════════ SKIP LINK ═══════════════════════ */
+    .skip-link {
+      position: absolute; top: -40px; left: 0;
+      background: var(--gold); color: var(--navy);
+      padding: 8px 16px; z-index: 9999;
+      text-decoration: none; font-size: 13px; font-weight: 600;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
+    @media (max-width: 1100px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .teach-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 820px) {
+      body { grid-template-columns: 1fr; }
+
+      .sidebar {
+        position: relative; height: auto;
+        grid-column: 1; grid-row: 1;
+      }
+      .sidebar-inner { padding: 22px 20px; }
+      .s-nav { flex-direction: row; flex-wrap: wrap; gap: 3px; }
+      .s-nav a { padding: 7px 11px; font-size: 12.5px; }
+      .s-footer { margin-top: 18px; }
+
+      .content-col { grid-column: 1; }
+      .main { padding: 28px 20px 40px; }
+      .site-footer { padding: 18px 20px; }
+      .progress-bar { left: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .sc { padding: 24px 20px; }
+      .teach-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    .sc:nth-child(1) { transition-delay: 0.04s; }
+    .sc:nth-child(2) { transition-delay: 0.08s; }
+    .sc:nth-child(3) { transition-delay: 0.12s; }
+  </style>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to Content</a>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- ═══════ SIDEBAR ═══════ -->
+  <aside class="sidebar" role="navigation" aria-label="Site navigation">
+    <div class="sidebar-inner">
+      <div class="avatar-wrap">
+        <div class="avatar-ring"></div>
+        <img src="headshot.jpeg" alt="Fatiu Babalola Salau"/>
+      </div>
+      <p class="s-name">Fatiu Babalola Salau</p>
+      <p class="s-role">Project Management | Business Management</p>
+      <div class="s-divider"></div>
+
+      <ul class="s-nav" id="sidebarNav">
+        <li><a href="#about" class="active"><span class="ni">⬡</span>About Me</a></li>
+        <li><a href="#projects"><span class="ni">◧</span>Projects</a></li>
+        <li><a href="#contact"><span class="ni">◌</span>Contact</a></li>
+      </ul>
+
+      <div class="s-footer">
+        <p class="s-footer-label">Find me online</p>
+        <div class="s-socials">
+          <a href="https://linkedin.com/in/fatiusalau" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════ CONTENT COLUMN ═══════ -->
+  <div class="content-col">
+
+    <main class="main" id="main-content">
+
+      <!-- ABOUT -->
+      <section class="sc" id="about">
+        <div class="sec-head">
+          <div class="sec-icon">🎓</div>
+          <h1>About Me</h1>
+        </div>
+        <div class="about-grid">
+          <div class="about-bio">
+            <p>Value driven and versatile project manager with extensive experience delivering complex projects across freight, construction, healthcare, and logistics industries.</p>
+            <p>Proven record of leading cross-functional teams to deliver results and user centered products in a fast-paced environment by adding structure to uncertainty while maintaining productivity, flexibility and innovation. Expert in risk mitigation, governance and stakeholder engagement, with the ability to translate client needs into actionable plans</p>
+            <p>Recognised for building high-performing teams, streamlining processes, and consistently fulfilling clients and business objectives.</p>
+            <div style="margin-top:22px;">
+              <p style="font-size:10px;color:rgba(255,255,255,0.38);text-transform:uppercase;letter-spacing:1.8px;margin-bottom:11px;">Core Skills</p>
+              <div class="tag-row">
+                <span class="tag">Project Lifecycle Management</span>
+                <span class="tag">Budgeting, Forecasting & Cost Control</span>
+                <span class="tag">Risk Identification & Mitigation</span>
+                <span class="tag">Clear user stories, epics, and use cases</span>
+                <span class="tag">Client & Stakeholder Engagement</span>
+                <span class="tag">Resource Procurement & Contract Management</span>
+                <span class="tag">Governance & Quality Assurance</span>
+                <span class="tag">Digital supply chain technologies</span>
+                <span class="tag">Cross-Functional Team Leadership & Coaching</span>
+                <span class="tag">Version Control</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-meta">
+            <div class="meta-block">
+              <h2>Education & Certification</h2>
+              <ul class="tl">
+                <li><strong>MSc, Logistics & Supply Chain</strong> · University of Portsmouth · 2022–2023</li>
+                <li><strong>Btech Transport Management</strong> · Lautech · 2012–2018</li>
+                <li><strong>Prince2 Certification</strong> · PeopleCert · 2012–2014</li>
+              </ul>
+            </div>
+            <div class="meta-block">
+              <h2>Experience</h2>
+              <ul class="tl">
+                <li><strong>Project Manager</strong> · OneCare · Oct 2023–Present</li>
+                <li><strong>Asst Project Manager</strong> · Grimaldi · Sept 2021–Aug 2022</li>
+                <li><strong>Asst project Manager</strong> · Sadeb Global · Apr. 2020- Sept.2021</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="sc" id="projects">
+        <div class="sec-head">
+          <div class="sec-icon">🔬</div>
+          <h1>Projects</h1>
+        </div>
+        <div class="proj-empty">
+          <span class="pe-icon">⚗</span>
+          <strong>Coming Soon</strong>
+          <p>Projects are currently being updated. Please check back soon:)</p>
+        </div>
+      </section>
+
+      <!-- TEACHING -->
+      <section class="sc" id="teaching">
+        <div class="sec-head">
+          <div class="sec-icon">🏛</div>
+          <h1>Projects &amp; Work Experience</h1>
+        </div>
+        <div class="teach-grid">
+          <div class="teach-block">
+            <h2><span>📖</span> Projects</h2>
+            <ul class="course-list">
+              <li class="c-item">
+                <span class="c-code">PRJ1</span>
+                <span class="c-desc">Led the design and rollout of a stakeholder engagement framework for a £1M logistic optimisation project in the freight industry. Conducted stakeholder mapping to identify client sponsors, delivery partners, and regulatory bodies. Developed a targeted communication plan, using MS Teams, SharePoint, and structured reporting dashboards to keep all parties informed and aligned. Facilitated workshops and town halls to address concerns and align expectations. Applied agile delivery principles, adapting milestones to shifting client priorities. Achieved a 95% stakeholder satisfaction score, accelerated decision-making, and reduced resistance to change by 40%. This project demonstrated Communicating & Influencing by building consensus and driving adoption across diverse stakeholder groups.</span>
+              </li>
+              <li class="c-item">
+                <span class="c-code">PRJ2</span>
+                <span class="c-desc">Implemented a governance and documentation framework for a £5M residential construction project. Standardised reporting templates established version control protocols, and integrated documentation across MS Project, Excel, and SharePoint. Trained cross-functional teams in compliance with internal and client quality standards, reducing documentation errors by 25% and audit preparation time by 30%. Produced clear, concise dashboards and variance reports for senior stakeholders, ensuring transparent oversight and accountability. The improved data accuracy enabled quicker decision-making and stronger alignment with client objectives. This initiative demonstrated Delivering at Pace by embedding governance structures that ensured timely, accurate reporting while maintaining momentum across multiple project phases.</span>
+              </li>
+              <li class="c-item">
+                <span class="c-code">PRJ3</span>
+                <span class="c-desc">Led a cross-functional project team of 12 in delivering a logistics distribution centre fit-out project worth £3M. Defined clear workstreams, allocated resources, and provided coaching to junior project coordinators. Facilitated weekly stand-ups, tracked progress against milestones, and resolved delivery challenges swiftly. Encouraged knowledge-sharing, introduced process checklists, and promoted accountability within the team. As a result, project handover was completed three weeks ahead of schedule and within budget. Team productivity improved by 20%, and client satisfaction surveys reflected a significant increase in confidence. This project highlighted leadership, as I set direction, inspired collaboration, and created an environment where individuals thrived and exceeded expectations.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="teach-block">
+            <h2><span>🎙</span>Professional Experience</h2>
+            <div class="role-item">
+              <p class="role-t">Project Manager</p>
+              <p class="role-p">OneCare Recruitment</p>
+              <p class="role-desc">•Directed end-to-end logistics and infrastructure projects with budgets exceeding £2M, ensuring on-time delivery and alignment with client scope, schedule, and compliance requirements. </p>
+<p>•Prepared project charters, schedules, risk registers, and cost estimates to support executive decision-making and client reporting.</p>
+<p>•Spearheaded procurement by managing RFP processes, evaluating bids, and negotiating with suppliers and achieving an 8% cost saving across multiple projects.</p>
+<p>•Implemented project governance frameworks, standardise reporting tools and documentation processes, improving data accuracy by 25%.</p>
+<p>•Mentored and coordinated a project team of 12 members, fostering accountability, knowledge-sharing, and continuous improvement.</p>
+<p>•Ensured backlogs are prioritised based on the quarterly roadmaps, KPIs and commercial value.</p>
+<p>•Ensured user stories have clearly defined acceptance criteria and aligned to the overall delivery of the platform goals and desired customer outcomes.</p>
+              <p class="role-d">Oct 2023-Present</p>
+            </div>
+            <div class="role-item">
+              <p class="role-t">Assistant Project Manager</p>
+              <p class="role-p">Grimaldi</p>
+              <p class="role-desc">•Lead the discovery and analysis phases of supply chain transformation initiatives, ensuring requirements are fully understood and documented.</p>
+<p>•Translate business needs into clear user stories, epics, and use cases that drive delivery in an agile setting.</p>
+<p>•Partner with cross-functional teams (logistics, operations, IT, data, and retail teams) to design and deliver supply chain solutions.</p>
+<p>•Champion item-level tracking, auto-receiving, and operational process improvements from depot to store.</p>
+<p>•Ensure decisions are supported by data-driven insights, promoting evidence-based enhancements across the supply chain.</p>
+<p>•	Engage and influence stakeholders at multiple levels, providing clear communication and structured delivery updates.</p>
+              <p class="role-d">Sep.2021-Oct 2022</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="sc" id="contact">
+        <div class="sec-head">
+          <div class="sec-icon">✉</div>
+          <h1>Contact</h1>
+        </div>
+        <div class="contact-grid">
+          <a class="c-card" href="mailto:jimoh.toheeb@aims.ac.rw">
+            <div class="c-card-icon">✉</div>
+            <div class="c-card-text">
+              <span class="c-label">Email</span>
+              <span class="c-val">Get in touch!</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer class="site-footer">
+      <span class="footer-logo">Fatiu B. Salau</span>
+
+      <div class="footer-socials">
+        <a href="mailto:salaufatiu@gmail.com" title="Email" aria-label="Email">✉</a>
+        <a href="https://linkedin.com/in/fatiusalau-2ba536238" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">in</a>
+      </div>
+
+      <span>© <span id="footerYear"></span> </span>
+    </footer>
+
+  </div><!-- end .content-col -->
+
+  <script>
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    const bar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      bar.style.transform = `scaleX(${pct})`;
+    }, { passive: true });
+
+    const cards = document.querySelectorAll('.sc');
+    const revIO = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revIO.unobserve(e.target); } });
+    }, { threshold: 0.07, rootMargin: '-30px 0px' });
+    cards.forEach(c => revIO.observe(c));
+
+    const sections = document.querySelectorAll('section.sc');
+    const navLinks = document.querySelectorAll('.s-nav a');
+    const actIO = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${id}`));
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+    sections.forEach(s => actIO.observe(s));
+  </script>
+</body>
+</html>
